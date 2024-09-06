@@ -24,22 +24,6 @@ public class MyArrayList<E> implements List<E> {
         addAll(c);
     }
 
-    private void grow() {
-        int newCapacity = (data.length / 2) * 3 + 1;
-        growToNewCapacity(newCapacity);
-    }
-
-    private void grow(int addedSize) {
-        int newCapacity = (data.length + addedSize / 2) * 3 + 1;
-        growToNewCapacity(newCapacity);
-    }
-
-    private void growToNewCapacity(int newCapacity) {
-        Object[] newData = new Object[newCapacity];
-        System.arraycopy(data, 0, newData, 0, data.length);
-        data = newData;
-    }
-
     @Override
     public int size() {
         return size;
@@ -92,17 +76,41 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        for (Object o : c) {
+            if (!contains(o)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        if (size + c.size() > data.length) {
+            grow(c.size());
+        }
+        for (E e : c) {
+            add(e);
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+        if (isIndexOutOfBounds(index)) {
+            throw new IndexOutOfBoundsException(String.format("Index %d is out of bounds", index));
+        }
+        if (size + c.size() > data.length) {
+            grow(c.size());
+        }
+        int fromIndex = index + c.size();
+        System.arraycopy(data, index, data, fromIndex, size - index);
+        int i = index;
+        for (E e : c) {
+            data[i++] = e;
+        }
+        size += c.size();
+        return true;
     }
 
     @Override
@@ -242,5 +250,21 @@ public class MyArrayList<E> implements List<E> {
 
     private void removeAt(int index) {
         System.arraycopy(data, index + 1, data, index, size - index - 1);
+    }
+
+    private void grow() {
+        int newCapacity = (data.length / 2) * 3 + 1;
+        growToNewCapacity(newCapacity);
+    }
+
+    private void grow(int addedSize) {
+        int newCapacity = ((data.length + addedSize) / 2) * 3 + 1;
+        growToNewCapacity(newCapacity);
+    }
+
+    private void growToNewCapacity(int newCapacity) {
+        Object[] newData = new Object[newCapacity];
+        System.arraycopy(data, 0, newData, 0, data.length);
+        data = newData;
     }
 }

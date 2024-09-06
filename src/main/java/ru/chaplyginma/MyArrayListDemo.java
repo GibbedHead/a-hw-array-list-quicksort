@@ -130,5 +130,24 @@ public class MyArrayListDemo {
         System.out.println(stringList);
         System.out.println("First index of 'AAA': " + stringList.indexOf("AAA"));
         System.out.println("Last index of 'AAA': " + stringList.lastIndexOf("AAA"));
+
+        System.out.println("---------------");
+        System.out.println(stringList);
+        System.out.println("Test if contains all from collection ['AAA', 'BBB']");
+        System.out.println(stringList.containsAll(List.of("AAA", "BBB")));
+        System.out.println("Test if contains all from collection ['AAA', 'ZZZ']");
+        System.out.println(stringList.containsAll(List.of("AAA", "ZZZ")));
+
+        System.out.println("---------------");
+        System.out.println(stringList);
+        System.out.println("Add all from collection ['AAAA', 'BBBB']");
+        stringList.addAll(List.of("AAAA", "BBBB"));
+        System.out.println(stringList);
+
+        System.out.println("---------------");
+        System.out.println(stringList);
+        System.out.println("Add all from collection ['ZZZ', 'YYY', '1', '2'] at index 3");
+        stringList.addAll(3, List.of("ZZZ", "YYY", "1", "2"));
+        System.out.println(stringList);
     }
 }
