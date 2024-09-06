@@ -89,5 +89,11 @@ public class MyArrayListDemo {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Exception caught in trying out of bounds index 100: " + e.getMessage());
         }
+
+        System.out.println("---------------");
+        System.out.println("Replace element 'AA' with 'AAA'");
+        String old = stringList.set(0, "AAA");
+        System.out.println(old);
+        System.out.println(stringList);
     }
 }

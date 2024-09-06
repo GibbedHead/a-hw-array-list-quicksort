@@ -126,15 +126,21 @@ public class MyArrayList<E> implements List<E> {
     @SuppressWarnings("unchecked")
     @Override
     public E get(int index) {
-        if (!checkIndex(index)) {
+        if (isIndexOutOfBounds(index)) {
             throw new IndexOutOfBoundsException(String.format("Index %d is out of bounds", index));
         }
         return (E) data[index];
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E set(int index, E element) {
-        return null;
+        if (isIndexOutOfBounds(index)) {
+            throw new IndexOutOfBoundsException(String.format("Index %d is out of bounds", index));
+        }
+        E old = (E) data[index];
+        data[index] = element;
+        return old;
     }
 
     @Override
@@ -199,7 +205,7 @@ public class MyArrayList<E> implements List<E> {
         return sj.toString();
     }
 
-    private boolean checkIndex(int index) {
-        return index >= 0 && index < size;
+    private boolean isIndexOutOfBounds(int index) {
+        return index < 0 && index >= size;
     }
 }
