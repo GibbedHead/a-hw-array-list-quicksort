@@ -108,5 +108,27 @@ public class MyArrayListDemo {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Exception caught in trying to remove out of bounds index 100: " + e.getMessage());
         }
+
+        System.out.println("---------------");
+        System.out.println(stringList);
+        System.out.println("Add 'BBB' at index 1");
+        stringList.add(1, "BBB");
+        System.out.println(stringList);
+
+        System.out.println("---------------");
+        System.out.println("Add at index 10 with exception");
+        try {
+            stringList.add(10, "YY");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Exception caught in trying to add out of bounds index 100: " + e.getMessage());
+        }
+
+        System.out.println("---------------");
+        System.out.println(stringList);
+        System.out.println("Add 'AAA'");
+        stringList.add("AAA");
+        System.out.println(stringList);
+        System.out.println("First index of 'AAA': " + stringList.indexOf("AAA"));
+        System.out.println("Last index of 'AAA': " + stringList.lastIndexOf("AAA"));
     }
 }

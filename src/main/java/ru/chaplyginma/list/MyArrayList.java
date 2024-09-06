@@ -145,7 +145,15 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-
+        if (isIndexOutOfBounds(index)) {
+            throw new IndexOutOfBoundsException(String.format("Index %d is out of bounds", index));
+        }
+        if (size == data.length) {
+            grow();
+        }
+        System.arraycopy(data, index, data, index + 1, size - index - 1);
+        data[index] = element;
+        size++;
     }
 
     @SuppressWarnings("unchecked")
@@ -167,10 +175,12 @@ public class MyArrayList<E> implements List<E> {
             if (search == null) {
                 if (data[i] == null) {
                     index = i;
+                    break;
                 }
             } else {
                 if (data[i].equals(search)) {
                     index = i;
+                    break;
                 }
             }
         }
@@ -178,8 +188,22 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
-    public int lastIndexOf(Object o) {
-        return 0;
+    public int lastIndexOf(Object search) {
+        int index = -1;
+        for (int i = size - 1; i > 0; i--) {
+            if (search == null) {
+                if (data[i] == null) {
+                    index = i;
+                    break;
+                }
+            } else {
+                if (data[i].equals(search)) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+        return index;
     }
 
     @Override
