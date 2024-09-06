@@ -149,5 +149,11 @@ public class MyArrayListDemo {
         System.out.println("Add all from collection ['ZZZ', 'YYY', '1', '2'] at index 3");
         stringList.addAll(3, List.of("ZZZ", "YYY", "1", "2"));
         System.out.println(stringList);
+
+        System.out.println("---------------");
+        List<Integer> intList = new MyArrayList<>(List.of(1, 2, 3));
+        System.out.println(intList);
+        intList.addAll(List.of(4, 5, 6));
+        System.out.println(intList);
     }
 }

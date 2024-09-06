@@ -20,7 +20,6 @@ public class MyArrayList<E> implements List<E> {
 
     public MyArrayList(Collection<? extends E> c) {
         data = new Object[c.size()];
-        size = c.size();
         addAll(c);
     }
 
