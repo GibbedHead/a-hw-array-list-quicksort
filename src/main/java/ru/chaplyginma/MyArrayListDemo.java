@@ -83,11 +83,11 @@ public class MyArrayListDemo {
         System.out.println(stringList.get(3));
 
         System.out.println("---------------");
-        System.out.println("Trying out of bounds index 100");
+        System.out.println("Trying get out of bounds index 100");
         try {
             String index100Element = stringList.get(100);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Exception caught in trying out of bounds index 100: " + e.getMessage());
+            System.out.println("Exception caught in trying to get out of bounds index 100: " + e.getMessage());
         }
 
         System.out.println("---------------");
@@ -95,5 +95,18 @@ public class MyArrayListDemo {
         String old = stringList.set(0, "AAA");
         System.out.println(old);
         System.out.println(stringList);
+
+        System.out.println("---------------");
+        System.out.println("Remove at index 2");
+        System.out.println(stringList.remove(2));
+        System.out.println(stringList);
+
+        System.out.println("---------------");
+        System.out.println("Remove at index 10 with exception");
+        try {
+            String old2 = stringList.remove(10);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Exception caught in trying to remove out of bounds index 100: " + e.getMessage());
+        }
     }
 }

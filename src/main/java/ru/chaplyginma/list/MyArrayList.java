@@ -85,7 +85,7 @@ public class MyArrayList<E> implements List<E> {
         if (index == -1) {
             return false;
         }
-        System.arraycopy(data, index + 1, data, index, size - index - 1);
+        removeAt(index);
         size--;
         return true;
     }
@@ -148,9 +148,16 @@ public class MyArrayList<E> implements List<E> {
 
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E remove(int index) {
-        return null;
+        if (isIndexOutOfBounds(index)) {
+            throw new IndexOutOfBoundsException(String.format("Index %d is out of bounds", index));
+        }
+        E old = (E) data[index];
+        removeAt(index);
+        size--;
+        return old;
     }
 
     @Override
@@ -207,5 +214,9 @@ public class MyArrayList<E> implements List<E> {
 
     private boolean isIndexOutOfBounds(int index) {
         return index < 0 && index >= size;
+    }
+
+    private void removeAt(int index) {
+        System.arraycopy(data, index + 1, data, index, size - index - 1);
     }
 }
