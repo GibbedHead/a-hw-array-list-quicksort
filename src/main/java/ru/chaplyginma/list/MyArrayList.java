@@ -1,9 +1,6 @@
 package ru.chaplyginma.list;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class MyArrayList<E> implements List<E> {
 
@@ -27,6 +24,22 @@ public class MyArrayList<E> implements List<E> {
         addAll(c);
     }
 
+    private void grow() {
+        int newCapacity = (data.length / 2) * 3 + 1;
+        growToNewCapacity(newCapacity);
+    }
+
+    private void grow(int addedSize) {
+        int newCapacity = (data.length + addedSize / 2) * 3 + 1;
+        growToNewCapacity(newCapacity);
+    }
+
+    private void growToNewCapacity(int newCapacity) {
+        Object[] newData = new Object[newCapacity];
+        System.arraycopy(data, 0, newData, 0, data.length);
+        data = newData;
+    }
+
     @Override
     public int size() {
         return size;
@@ -38,8 +51,8 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
-    public boolean contains(Object o) {
-        return false;
+    public boolean contains(Object search) {
+        return indexOf(search) != -1;
     }
 
     @Override
@@ -59,12 +72,22 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean add(E e) {
-        return false;
+        if (size == data.length) {
+            grow();
+        }
+        data[size++] = e;
+        return true;
     }
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        int index = indexOf(o);
+        if (index == -1) {
+            return false;
+        }
+        System.arraycopy(data, index + 1, data, index, size - index - 1);
+        size--;
+        return true;
     }
 
     @Override
@@ -94,7 +117,10 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public void clear() {
-
+        for (Object o : data) {
+            o = null;
+        }
+        size = 0;
     }
 
     @Override
@@ -118,8 +144,20 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
-    public int indexOf(Object o) {
-        return 0;
+    public int indexOf(Object search) {
+        int index = -1;
+        for (int i = 0; i < size; i++) {
+            if (search == null) {
+                if (data[i] == null) {
+                    index = i;
+                }
+            } else {
+                if (data[i].equals(search)) {
+                    index = i;
+                }
+            }
+        }
+        return index;
     }
 
     @Override
@@ -140,5 +178,20 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
         return List.of();
+    }
+
+    @Override
+    public String toString() {
+        return "MyArrayList{" +
+                onlySetListElementsToString() +
+                '}';
+    }
+
+    private String onlySetListElementsToString() {
+        StringJoiner sj = new StringJoiner(", ");
+        for (int i = 0; i < size; i++) {
+            sj.add(data[i].toString());
+        }
+        return sj.toString();
     }
 }
