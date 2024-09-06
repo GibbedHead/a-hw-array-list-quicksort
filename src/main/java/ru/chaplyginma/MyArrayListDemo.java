@@ -68,5 +68,26 @@ public class MyArrayListDemo {
         System.out.println(stringList.contains("G"));
         stringList.add("AA");
         System.out.println(stringList);
+
+        System.out.println("---------------");
+        System.out.println("Add 'BB', 'CC', 'DD', 'EE'");
+        stringList.add("BB");
+        stringList.add("CC");
+        stringList.add("DD");
+        stringList.add("EE");
+
+        System.out.println("---------------");
+        System.out.println("Get 1 and 3 elements");
+        System.out.println(stringList);
+        System.out.println(stringList.get(1));
+        System.out.println(stringList.get(3));
+
+        System.out.println("---------------");
+        System.out.println("Trying out of bounds index 100");
+        try {
+            String index100Element = stringList.get(100);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Exception caught in trying out of bounds index 100: " + e.getMessage());
+        }
     }
 }

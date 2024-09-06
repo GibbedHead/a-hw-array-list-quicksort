@@ -123,9 +123,13 @@ public class MyArrayList<E> implements List<E> {
         size = 0;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public E get(int index) {
-        return null;
+        if (!checkIndex(index)) {
+            throw new IndexOutOfBoundsException(String.format("Index %d is out of bounds", index));
+        }
+        return (E) data[index];
     }
 
     @Override
@@ -193,5 +197,9 @@ public class MyArrayList<E> implements List<E> {
             sj.add(data[i].toString());
         }
         return sj.toString();
+    }
+
+    private boolean checkIndex(int index) {
+        return index >= 0 && index < size;
     }
 }
