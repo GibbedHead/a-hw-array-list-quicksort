@@ -3,6 +3,7 @@ package ru.chaplyginma.list;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -121,5 +122,16 @@ class MyArrayListTest {
 
         assertThat(list.size()).isEqualTo(2);
         assertThat(list.contains("a")).isFalse();
+    }
+
+    @Test
+    @DisplayName("Test sort")
+    void givenNonEmptyListAndComparator_whenSort_thenListIsSorted() {
+        List<String> list = new MyArrayList<>(List.of("c", "a", "b"));
+        list.sort(Comparator.naturalOrder());
+
+        assertThat(list.indexOf("a")).isEqualTo(0);
+        assertThat(list.indexOf("b")).isEqualTo(1);
+        assertThat(list.indexOf("c")).isEqualTo(2);
     }
 }

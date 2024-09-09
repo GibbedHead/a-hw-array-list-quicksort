@@ -221,6 +221,12 @@ public class MyArrayList<E> implements List<E> {
         return index;
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public void sort(Comparator<? super E> c) {
+        Arrays.sort((E[]) data, c);
+    }
+
     @Override
     public ListIterator<E> listIterator() {
         return null;
