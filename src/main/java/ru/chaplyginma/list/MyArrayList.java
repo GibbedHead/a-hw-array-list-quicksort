@@ -114,12 +114,20 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        for (Object o : c) {
+            remove(o);
+        }
+        return true;
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        for (Object o : data) {
+            if (!c.contains(o)) {
+                remove(o);
+            }
+        }
+        return true;
     }
 
     @Override
