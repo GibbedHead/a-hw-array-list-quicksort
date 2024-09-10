@@ -2,9 +2,7 @@ package ru.chaplyginma.sort;
 
 import ru.chaplyginma.list.MyArrayList;
 
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 public class MyListSort {
 
@@ -12,10 +10,11 @@ public class MyListSort {
         qSort(list, comparator, 0, list.size() - 1);
     }
 
+    public static <T extends Comparable<T>> void quickSort(MyArrayList<T> list) {
+        qSort(list, Comparator.naturalOrder(), 0, list.size() - 1);
+    }
+
     private static <T> void qSort(MyArrayList<T> list, Comparator<T> comparator, int left, int right) {
-        List<T> init = new MyArrayList<>(Arrays.stream(list.toArray()).map((n) -> {
-            return (T) n;
-        }).toList());
         if (left < right) {
             int pivot = partition(list, comparator, left, right);
             qSort(list, comparator, left, pivot);
