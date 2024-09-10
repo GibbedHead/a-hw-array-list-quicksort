@@ -1,5 +1,11 @@
 package ru.chaplyginma.model;
 
+/**
+ * Represents a person with a first name, last name, and age.
+ *
+ * <p>This class implements the {@link Comparable} interface, providing a natural
+ * ordering based on last name, then first name, and finally age.
+ */
 public class Person implements Comparable<Person> {
     private final String firstName;
     private final String lastName;
@@ -11,6 +17,18 @@ public class Person implements Comparable<Person> {
         this.age = age;
     }
 
+    /**
+     * Compares this {@code Person} object to another {@code Person} object.
+     *
+     * <p>The comparison is based on the following order:
+     * 1. Last name (ascending)
+     * 2. First name (ascending)
+     * 3. Age (ascending)
+     *
+     * @param o The {@code Person} object to compare with.
+     * @return A negative integer, zero, or a positive integer as this person
+     * is less than, equal to, or greater than the specified person.
+     */
     @Override
     public int compareTo(Person o) {
         int lastNameComparison = lastName.compareTo(o.lastName);

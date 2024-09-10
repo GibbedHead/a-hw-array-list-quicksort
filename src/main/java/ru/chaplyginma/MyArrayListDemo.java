@@ -4,6 +4,9 @@ import ru.chaplyginma.list.MyArrayList;
 
 import java.util.List;
 
+/**
+ * Demo class for testing some of a use cases of a MyArrayList
+ */
 public class MyArrayListDemo {
 
     public static void main(String[] args) {
