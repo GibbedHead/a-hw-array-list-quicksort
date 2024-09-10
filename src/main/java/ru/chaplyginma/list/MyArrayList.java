@@ -45,7 +45,7 @@ public class MyArrayList<E> implements List<E> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return data.clone();
     }
 
     @Override
